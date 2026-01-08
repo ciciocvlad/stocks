@@ -1,0 +1,32 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.item {
+  width: 100%;
+  justify-self: center;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 0.5rem;
+}
+
+.input_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons_wrapper {
+  display: flex;
+}
+
+@media only screen and (max-width: 800px) {
+  .container {
+    margin: 1rem 0;
+  }
+}
