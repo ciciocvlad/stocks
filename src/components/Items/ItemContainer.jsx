@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -7,26 +7,26 @@ import {
   Box,
   Chip,
   Divider,
-  IconButton
-} from '@mui/material'
-import { Close, Done } from '@mui/icons-material'
-import { motion } from 'motion/react'
-import classes from './Items.module.css'
+  IconButton,
+} from "@mui/material";
+import { Close, Done } from "@mui/icons-material";
+import { motion } from "motion/react";
+import classes from "./Items.module.css";
 
 export const ItemContainer = ({ item, sort }) => {
-  const [isInput, setIsInput] = useState(false)
-  const [value, setValue] = useState(item.min_stock)
+  const [isInput, setIsInput] = useState(false);
+  const [value, setValue] = useState(item.min_stock);
 
   const done = () => {
-    item.min_stock = value
-    setIsInput(false)
-    sort()
-  }
+    item.min_stock = value;
+    setIsInput(false);
+    sort();
+  };
 
   const close = () => {
-    setValue(item.min_stock)
-    setIsInput(false)
-  }
+    setValue(item.min_stock);
+    setIsInput(false);
+  };
 
   return (
     <Card
@@ -66,15 +66,15 @@ export const ItemContainer = ({ item, sort }) => {
               <Input
                 autoFocus
                 value={value}
-                onChange={e => setValue(e.target.value)}
-                inputProps={{ style: { padding: 0, height: 'fit-content' } }}
+                onChange={(e) => setValue(e.target.value)}
+                inputProps={{ style: { padding: 0, height: "fit-content" } }}
               />
               <Box className={classes.icons_wrapper}>
                 <IconButton onClick={done} sx={{ padding: 0 }}>
-                  <Done sx={{ color: 'green' }} />
+                  <Done sx={{ color: "green" }} />
                 </IconButton>
                 <IconButton onClick={close} sx={{ padding: 0 }}>
-                  <Close sx={{ color: 'red' }} />
+                  <Close sx={{ color: "red" }} />
                 </IconButton>
               </Box>
             </Box>
@@ -91,11 +91,11 @@ export const ItemContainer = ({ item, sort }) => {
             <Chip
               size="small"
               label={`${item.stock} units`}
-              color={item.stock > item.min_stock ? 'success' : 'error'}
+              color={item.stock > item.min_stock ? "success" : "error"}
             />
           </Box>
         </Box>
       </CardContent>
     </Card>
-  )
-}
+  );
+};

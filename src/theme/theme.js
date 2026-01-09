@@ -1,261 +1,261 @@
-import { createTheme as createMuiTheme } from '@mui/material'
-import { getCssVar } from '../utils/css_var_to_js'
+import { createTheme as createMuiTheme } from "@mui/material";
+import { getCssVar } from "../utils/css_var_to_js";
 
 export const lightPalette = {
-  mode: 'light',
+  mode: "light",
   primary: {
-    main: getCssVar('--color-purple900'),
-    light: getCssVar('--color-purple900'),
-    dark: getCssVar('--color-white200'),
-    contrastText: getCssVar('--color-white800')
+    main: getCssVar("--color-purple900"),
+    light: getCssVar("--color-purple900"),
+    dark: getCssVar("--color-white200"),
+    contrastText: getCssVar("--color-white800"),
   },
   secondary: {
-    main: getCssVar('--color-green300'),
-    light: getCssVar('--color-green300'),
-    dark: getCssVar('--color-green400'),
-    contrastText: getCssVar('--color-black700')
+    main: getCssVar("--color-green300"),
+    light: getCssVar("--color-green300"),
+    dark: getCssVar("--color-green400"),
+    contrastText: getCssVar("--color-black700"),
   },
   warning: {
-    main: getCssVar('--color-pink700')
+    main: getCssVar("--color-pink700"),
   },
   text: {
-    primary: getCssVar('--color-blue500'),
-    secondary: getCssVar('--color-black700')
+    primary: getCssVar("--color-blue500"),
+    secondary: getCssVar("--color-black700"),
   },
   error: {
-    main: getCssVar('--color-red500'),
-    light: getCssVar('--color-red500'),
-    dark: getCssVar('--color-red200'),
-    contrastText: getCssVar('--color-black')
+    main: getCssVar("--color-red500"),
+    light: getCssVar("--color-red500"),
+    dark: getCssVar("--color-red200"),
+    contrastText: getCssVar("--color-black"),
   },
   background: {
-    default: getCssVar('--color-white200'),
-    main: getCssVar('--color-white087'),
-    paper: getCssVar('--color-white200')
+    default: getCssVar("--color-white200"),
+    main: getCssVar("--color-white087"),
+    paper: getCssVar("--color-white200"),
   },
   info: {
-    main: getCssVar('--color-orange')
+    main: getCssVar("--color-orange"),
   },
   general: {
-    frame: getCssVar('--color-white'),
-    background: getCssVar('--color-white100'),
-    text: getCssVar('--color-black'),
-    employeeCard: getCssVar('--color-white'),
-    employeeCardLeft: getCssVar('--light-black'),
-    standardText: getCssVar('--color-black100'),
-    shareButton: getCssVar('--color-green700'),
-    logoBgColor: getCssVar('--color-white'),
-    header: getCssVar('--color-purple900')
+    frame: getCssVar("--color-white"),
+    background: getCssVar("--color-white100"),
+    text: getCssVar("--color-black"),
+    employeeCard: getCssVar("--color-white"),
+    employeeCardLeft: getCssVar("--light-black"),
+    standardText: getCssVar("--color-black100"),
+    shareButton: getCssVar("--color-green700"),
+    logoBgColor: getCssVar("--color-white"),
+    header: getCssVar("--color-purple900"),
   },
   status: {
-    online: getCssVar('--color-green500'),
-    offline: getCssVar('--color-yellow500'),
-    border: getCssVar('--color-white'),
-    background: getCssVar('--color-purple700'),
-    text: getCssVar('--color-purple900')
+    online: getCssVar("--color-green500"),
+    offline: getCssVar("--color-yellow500"),
+    border: getCssVar("--color-white"),
+    background: getCssVar("--color-purple700"),
+    text: getCssVar("--color-purple900"),
   },
   time_off: {
-    time_off_background: getCssVar('--color-white700'),
-    taken_days_background: getCssVar('--color-yellow100'),
-    font: getCssVar('--color-black100')
+    time_off_background: getCssVar("--color-white700"),
+    taken_days_background: getCssVar("--color-yellow100"),
+    font: getCssVar("--color-black100"),
   },
   technical_profile: {
-    primary: getCssVar('--color-purple100')
+    primary: getCssVar("--color-purple100"),
   },
   badge: {
-    text: getCssVar('--color-white'),
-    accent: getCssVar('--color-pink700')
+    text: getCssVar("--color-white"),
+    accent: getCssVar("--color-pink700"),
   },
   project: {
-    background: getCssVar('--color-white'),
-    edit: getCssVar('--color-purple900'),
-    add: getCssVar('--color-black100'),
-    cancel: getCssVar('--color-black500'),
-    input: getCssVar('--color-white200')
+    background: getCssVar("--color-white"),
+    edit: getCssVar("--color-purple900"),
+    add: getCssVar("--color-black100"),
+    cancel: getCssVar("--color-black500"),
+    input: getCssVar("--color-white200"),
   },
   filters: {
-    checked: getCssVar('--color-black700'),
-    background: getCssVar('--color-blue508'),
-    puller: getCssVar('--color-black'),
+    checked: getCssVar("--color-black700"),
+    background: getCssVar("--color-blue508"),
+    puller: getCssVar("--color-black"),
     expandListButton: {
-      hoverBackground: getCssVar('--color-black200')
-    }
+      hoverBackground: getCssVar("--color-black200"),
+    },
   },
   button: {
     primary: {
-      background: getCssVar('--color-green300'),
-      text: getCssVar('--color-black700'),
-      hoverBackground: getCssVar('--color-green400')
+      background: getCssVar("--color-green300"),
+      text: getCssVar("--color-black700"),
+      hoverBackground: getCssVar("--color-green400"),
     },
     secondary: {
-      background: getCssVar('--color-black500'),
-      text: getCssVar('--color-white'),
-      hoverBackground: getCssVar('--color-black700')
-    }
+      background: getCssVar("--color-black500"),
+      text: getCssVar("--color-white"),
+      hoverBackground: getCssVar("--color-black700"),
+    },
   },
   chip: {
-    background: getCssVar('--color-white024')
-  }
-}
+    background: getCssVar("--color-white024"),
+  },
+};
 
 export const darkPalette = {
-  mode: 'dark',
+  mode: "dark",
   primary: {
-    main: getCssVar('--color-purple500'),
-    light: getCssVar('--color-purple300'),
-    dark: getCssVar('--color-purple500'),
-    contrastText: getCssVar('--color-white800')
+    main: getCssVar("--color-purple500"),
+    light: getCssVar("--color-purple300"),
+    dark: getCssVar("--color-purple500"),
+    contrastText: getCssVar("--color-white800"),
   },
   secondary: {
-    main: getCssVar('--color-green700'),
-    light: getCssVar('--color-green300'),
-    dark: getCssVar('--color-black300'),
-    contrastText: getCssVar('--color-black')
+    main: getCssVar("--color-green700"),
+    light: getCssVar("--color-green300"),
+    dark: getCssVar("--color-black300"),
+    contrastText: getCssVar("--color-black"),
   },
   warning: {
-    main: getCssVar('--color-pink200')
+    main: getCssVar("--color-pink200"),
   },
   text: {
-    primary: getCssVar('--color-blue200'),
-    secondary: getCssVar('--color-white800')
+    primary: getCssVar("--color-blue200"),
+    secondary: getCssVar("--color-white800"),
   },
   error: {
-    main: getCssVar('--color-red200'),
-    light: getCssVar('--color-red500'),
-    dark: getCssVar('--color-red200'),
-    contrastText: getCssVar('--color-black')
+    main: getCssVar("--color-red200"),
+    light: getCssVar("--color-red500"),
+    dark: getCssVar("--color-red200"),
+    contrastText: getCssVar("--color-black"),
   },
   background: {
-    default: getCssVar('--color-purple600'),
-    main: getCssVar('--color-whiteI'),
-    paper: getCssVar('--color-purple600')
+    default: getCssVar("--color-purple600"),
+    main: getCssVar("--color-whiteI"),
+    paper: getCssVar("--color-purple600"),
   },
   info: {
-    main: getCssVar('--color-orange')
+    main: getCssVar("--color-orange"),
   },
   general: {
-    frame: getCssVar('--color-black400'),
-    background: getCssVar('--color-black700'),
-    text: getCssVar('--color-white'),
-    employeeCard: getCssVar('--color-purple500'),
-    employeeCardLeft: getCssVar('--dark-white'),
-    standardText: getCssVar('--color-black600'),
-    logoBgColor: getCssVar('--color-grey100'),
-    header: getCssVar('--color-purple800'),
-    shareButton: getCssVar('--color-green700'),
-    tehnicalProfile: getCssVar('--color-purple400')
+    frame: getCssVar("--color-black400"),
+    background: getCssVar("--color-black700"),
+    text: getCssVar("--color-white"),
+    employeeCard: getCssVar("--color-purple500"),
+    employeeCardLeft: getCssVar("--dark-white"),
+    standardText: getCssVar("--color-black600"),
+    logoBgColor: getCssVar("--color-grey100"),
+    header: getCssVar("--color-purple800"),
+    shareButton: getCssVar("--color-green700"),
+    tehnicalProfile: getCssVar("--color-purple400"),
   },
   status: {
-    online: getCssVar('--color-green700'),
-    offline: getCssVar('--color-yellow700'),
-    border: getCssVar('--color-black'),
-    background: getCssVar('--color-purple500'),
-    text: getCssVar('--color-purple900')
+    online: getCssVar("--color-green700"),
+    offline: getCssVar("--color-yellow700"),
+    border: getCssVar("--color-black"),
+    background: getCssVar("--color-purple500"),
+    text: getCssVar("--color-purple900"),
   },
   time_off: {
-    time_off_background: getCssVar('--color-purple300'),
-    taken_days_background: getCssVar('--color-purple300'),
-    font: getCssVar('--color-black600')
+    time_off_background: getCssVar("--color-purple300"),
+    taken_days_background: getCssVar("--color-purple300"),
+    font: getCssVar("--color-black600"),
   },
   technical_profile: {
-    primary: getCssVar('--color-white')
+    primary: getCssVar("--color-white"),
   },
   badge: {
-    text: getCssVar('--color-black700'),
-    accent: getCssVar('--color-pink200')
+    text: getCssVar("--color-black700"),
+    accent: getCssVar("--color-pink200"),
   },
   project: {
-    background: getCssVar('--color-grey'),
-    edit: getCssVar('--color-white200'),
-    add: getCssVar('--color-black100'),
-    cancel: getCssVar('--color-black300'),
-    input: getCssVar('--color-black500')
+    background: getCssVar("--color-grey"),
+    edit: getCssVar("--color-white200"),
+    add: getCssVar("--color-black100"),
+    cancel: getCssVar("--color-black300"),
+    input: getCssVar("--color-black500"),
   },
   filters: {
-    checked: getCssVar('--color-white'),
-    background: getCssVar('--color-blue208'),
-    puller: getCssVar('--color-white'),
+    checked: getCssVar("--color-white"),
+    background: getCssVar("--color-blue208"),
+    puller: getCssVar("--color-white"),
     expandListButton: {
-      hoverBackground: getCssVar('--color-black700')
-    }
+      hoverBackground: getCssVar("--color-black700"),
+    },
   },
   button: {
     primary: {
-      background: getCssVar('--color-green700'),
-      text: getCssVar('--color-black700'),
-      hoverBackground: getCssVar('--color-green800')
+      background: getCssVar("--color-green700"),
+      text: getCssVar("--color-black700"),
+      hoverBackground: getCssVar("--color-green800"),
     },
     secondary: {
-      background: getCssVar('--color-grey'),
-      text: getCssVar('--color-white'),
-      hoverBackground: getCssVar('--color-grey100')
-    }
+      background: getCssVar("--color-grey"),
+      text: getCssVar("--color-white"),
+      hoverBackground: getCssVar("--color-grey100"),
+    },
   },
   chip: {
-    background: getCssVar('--color-white024')
-  }
-}
+    background: getCssVar("--color-white024"),
+  },
+};
 
 const typography = {
   h1: {
-    fontFamily: 'Roboto Slab',
-    fontSize: '1.25rem',
-    fontWeight: 500
+    fontFamily: "Roboto Slab",
+    fontSize: "1.25rem",
+    fontWeight: 500,
   },
   subtitle1: {
-    fontFamily: 'Roboto Slab',
-    fontSize: '1.25rem',
-    fontWeight: 400
+    fontFamily: "Roboto Slab",
+    fontSize: "1.25rem",
+    fontWeight: 400,
   },
   subtitle2: {
-    fontFamily: 'Lato',
-    fontSize: '1rem',
-    fontWeight: 700
+    fontFamily: "Lato",
+    fontSize: "1rem",
+    fontWeight: 700,
   },
   body1: {
-    fontFamily: 'Lato',
-    fontSize: '1rem',
-    fontWeight: 400
+    fontFamily: "Lato",
+    fontSize: "1rem",
+    fontWeight: 400,
   },
   body2: {
-    fontFamily: 'Lato',
-    fontSize: '0.875rem',
-    fontWeight: 400
+    fontFamily: "Lato",
+    fontSize: "0.875rem",
+    fontWeight: 400,
   },
   caption: {
-    fontFamily: 'Lato',
-    fontSize: '0.75rem',
-    fontWeight: 400
+    fontFamily: "Lato",
+    fontSize: "0.75rem",
+    fontWeight: 400,
   },
   h2: {
-    fontFamily: 'Lato',
-    fontSize: '0.875rem',
-    fontWeight: 500
+    fontFamily: "Lato",
+    fontSize: "0.875rem",
+    fontWeight: 500,
   },
   button: {
-    fontFamily: 'Lato',
-    fontSize: '1.25rem',
-    fontWeight: 600
+    fontFamily: "Lato",
+    fontSize: "1.25rem",
+    fontWeight: 600,
   },
   h3: {
-    fontFamily: 'Lato',
-    fontSize: '1.125rem',
-    fontWeight: 800
+    fontFamily: "Lato",
+    fontSize: "1.125rem",
+    fontWeight: 800,
   },
   h4: {
-    FontFamily: 'Lato',
-    fontSize: '2.5rem',
-    fontWeight: 900
-  }
-}
+    FontFamily: "Lato",
+    fontSize: "2.5rem",
+    fontWeight: 900,
+  },
+};
 
-export const createTheme = (mode = 'dark') =>
+export const createTheme = (mode = "dark") =>
   createMuiTheme({
     mixins: {
       toolbar: {
-        minHeight: 96
-      }
+        minHeight: 96,
+      },
     },
     typography,
-    palette: mode === 'dark' ? darkPalette : lightPalette
-  })
+    palette: mode === "dark" ? darkPalette : lightPalette,
+  });

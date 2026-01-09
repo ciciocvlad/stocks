@@ -1,7 +1,7 @@
-import { Box } from '@mui/material'
+import { Box } from "@mui/material";
 
 export const BackButton = ({ show }) => (
-  <Box sx={{ display: show ? 'block' : 'none' }}>
+  <Box sx={{ display: show ? "block" : "none" }}>
     <svg
       width="16"
       height="16"
@@ -25,4 +25,4 @@ export const BackButton = ({ show }) => (
       />
     </svg>
   </Box>
-)
+);

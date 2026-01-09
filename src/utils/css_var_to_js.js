@@ -1,4 +1,4 @@
-import '../main.css'
+import "../main.css";
 
-export const getCssVar = name =>
-  getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+export const getCssVar = (name) =>
+  getComputedStyle(document.documentElement).getPropertyValue(name).trim();
