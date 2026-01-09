@@ -5,19 +5,19 @@ import {
   Container,
   Toolbar,
   useTheme,
-  Typography,
-} from "@mui/material";
-import { NavLink } from "react-router";
-import classes from "./AppBar.module.css";
-import { BackButton } from "../BackButton/BackButton";
-import { ActionsMenu } from "../Dropdown/Dropdown";
-import { useContext } from "react";
-import { FilterContext } from "../../context/FilterContext";
+  Typography
+} from '@mui/material'
+import { NavLink } from 'react-router'
+import classes from './AppBar.module.css'
+import { BackButton } from '../BackButton/BackButton'
+import { ActionsMenu } from '../Dropdown/Dropdown'
+import { useContext } from 'react'
+import { FilterContext } from '../../context/FilterContext'
 
 export const AppBar = ({ colorMode, setColorMode }) => {
-  const pages = { Items: "/", Stocks: "/stocks" };
-  const { palette } = useTheme();
-  const { showFilters, setShowFilters } = useContext(FilterContext);
+  const pages = { Items: '/', Stocks: '/stocks' }
+  const { palette } = useTheme()
+  const { showFilters, setShowFilters } = useContext(FilterContext)
 
   return (
     <MAppBar
@@ -28,7 +28,7 @@ export const AppBar = ({ colorMode, setColorMode }) => {
         <Toolbar disableGutters>
           <BackButton show={false} />
           <Box className={classes.content}>
-            {Object.keys(pages).map((page) => (
+            {Object.keys(pages).map(page => (
               <Link
                 key={page}
                 component={NavLink}
@@ -38,9 +38,9 @@ export const AppBar = ({ colorMode, setColorMode }) => {
                   mx: 2,
                   color: palette.primary.contrastText,
                   opacity: 0.7,
-                  "&.active": {
-                    opacity: 1,
-                  },
+                  '&.active': {
+                    opacity: 1
+                  }
                 }}
               >
                 <Typography variant="h1">{page}</Typography>
@@ -48,7 +48,7 @@ export const AppBar = ({ colorMode, setColorMode }) => {
             ))}
           </Box>
           <ActionsMenu
-            checked={colorMode === "dark"}
+            checked={colorMode === 'dark'}
             setColorMode={setColorMode}
             showFilters={showFilters}
             toggleFilters={() => setShowFilters(!showFilters)}
@@ -56,5 +56,5 @@ export const AppBar = ({ colorMode, setColorMode }) => {
         </Toolbar>
       </Container>
     </MAppBar>
-  );
-};
+  )
+}
