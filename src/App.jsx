@@ -7,6 +7,7 @@ import { AppBar } from './components/AppBar/AppBar'
 import { CssBaseline, Toolbar } from '@mui/material'
 import { getInitialColorMode } from './utils/color_mode_storage'
 import useLocalStorage from 'use-local-storage'
+import { ContextProvider } from './context/ContextProvider'
 
 export default function App() {
   const [colorMode, setColorMode] = useLocalStorage(
@@ -16,15 +17,17 @@ export default function App() {
 
   return (
     <ThemeProvider theme={createTheme(colorMode)}>
-      <CssBaseline />
-      <BrowserRouter>
-        <AppBar colorMode={colorMode} setColorMode={setColorMode} />
-        <Toolbar />
-        <Routes>
-          <Route index element={<Items />} />
-          <Route path="/stocks" element={<Stocks />} />
-        </Routes>
-      </BrowserRouter>
+      <ContextProvider>
+        <CssBaseline />
+        <BrowserRouter>
+          <AppBar colorMode={colorMode} setColorMode={setColorMode} />
+          <Toolbar />
+          <Routes>
+            <Route index element={<Items />} />
+            <Route path="/stocks" element={<Stocks />} />
+          </Routes>
+        </BrowserRouter>
+      </ContextProvider>
     </ThemeProvider>
   )
 }

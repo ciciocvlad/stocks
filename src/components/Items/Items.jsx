@@ -1,7 +1,20 @@
-import { useState } from 'react'
-import { Box, useTheme } from '@mui/material'
+import { useContext, useEffect, useState } from 'react'
+import {
+  Box,
+  Typography,
+  Button,
+  useTheme,
+  MenuItem,
+  Menu,
+  Divider,
+  ListItemText
+} from '@mui/material'
 import { ItemContainer } from './ItemContainer'
 import classes from './Items.module.css'
+import { FilterContext } from '../../context/FilterContext'
+import SwapVertIcon from '@mui/icons-material/SwapVert'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import CheckIcon from '@mui/icons-material/Check'
 
 const items = [
   {
@@ -493,21 +506,81 @@ const items = [
 
 export const Items = () => {
   const [sorted, setSorted] = useState(items.toReversed())
-  const { palette } = useTheme()
+  const [order, setOrder] = useState('asc')
+  const [anchorEl, setAnchorEl] = useState(null)
 
-  const sort = () =>
-    setSorted(
-      sorted.toSorted((a, b) => a.stock - a.min_stock - (b.stock - b.min_stock))
-    )
+  const { palette } = useTheme()
+  const { showFilters } = useContext(FilterContext)
+
+  const handleToggle = event => setAnchorEl(event.currentTarget)
+
+  const sortBy = (array, selector, order) =>
+    array.toSorted((fst, snd) => {
+      const _fst = selector(fst)
+      const _snd = selector(snd)
+
+      if (_fst < _snd) return order === 'asc' ? -1 : 1
+      if (_fst > _snd) return order === 'asc' ? 1 : -1
+      return 0
+    })
+  const sortItemsByMinStock = () =>
+    setSorted(sortBy(sorted, item => item.stock - item.min_stock, order))
+
+  const handleChangeOrder = event => {
+    const { value } = event.currentTarget.dataset
+    setOrder(value)
+  }
+
+  useEffect(sortItemsByMinStock, [order])
 
   return (
-    <Box
-      className={classes.container}
-      sx={{ backgroundColor: palette.background.paper }}
-    >
-      {sorted.map(item => (
-        <ItemContainer key={item.id} item={item} sort={sort} />
-      ))}
+    <Box>
+      <Box
+        sx={{ display: showFilters ? 'flex' : 'none', margin: '1rem 0 0 2rem' }}
+      >
+        <Button
+          id="sort-btn"
+          className={classes.sort_btn}
+          sx={{ backgroundColor: palette.info.main, borderRadius: '50px' }}
+          onClick={handleToggle}
+        >
+          <SwapVertIcon sx={{ color: palette.text.secondary }} />
+          <Typography variant="body2" sx={{ color: palette.text.secondary }}>
+            Sort
+          </Typography>
+          <ExpandMoreIcon
+            sx={{
+              color: palette.text.secondary,
+              transition: 'all 300ms ease-out',
+              transform: anchorEl ? 'rotate(180deg)' : 'rotate(0deg)'
+            }}
+          />
+        </Button>
+        <Menu
+          anchorEl={anchorEl}
+          open={!!anchorEl}
+          onClose={() => setAnchorEl(null)}
+        >
+          <MenuItem onClick={sortItemsByMinStock}>Sort by min stock</MenuItem>
+          <Divider />
+          <MenuItem data-value="asc" onClick={handleChangeOrder}>
+            <ListItemText>Ascending</ListItemText>
+            {order === 'asc' && <CheckIcon />}
+          </MenuItem>
+          <MenuItem data-value="desc" onClick={handleChangeOrder}>
+            <ListItemText>Descending</ListItemText>
+            {order === 'desc' && <CheckIcon />}
+          </MenuItem>
+        </Menu>
+      </Box>
+      <Box
+        className={classes.container}
+        sx={{ backgroundColor: palette.background.paper }}
+      >
+        {sorted.map(item => (
+          <ItemContainer key={item.id} item={item} sort={sortItemsByMinStock} />
+        ))}
+      </Box>
     </Box>
   )
 }
