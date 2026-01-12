@@ -508,6 +508,7 @@ export const Items = () => {
   const [sorted, setSorted] = useState(items.toReversed())
   const [order, setOrder] = useState('asc')
   const [anchorEl, setAnchorEl] = useState(null)
+  const [sortFunction, setSortFunction] = useState(null)
 
   const { palette } = useTheme()
   const { showFilters } = useContext(FilterContext)
@@ -523,15 +524,27 @@ export const Items = () => {
       if (_fst > _snd) return order === 'asc' ? 1 : -1
       return 0
     })
-  const sortItemsByMinStock = () =>
-    setSorted(sortBy(sorted, item => item.stock - item.min_stock, order))
+  const sortItemsByMinStock = () => setSorted(sortBy(sorted, item => item.stock - item.min_stock, order))
+  const sortItemsByName = () => setSorted(sortBy(sorted, item => item.name, order))
+
+  const handleChangeSortFunction = event => {
+    const { value } = event.currentTarget.dataset
+    switch (value) {
+      case 'stock':
+        setSortFunction(sortItemsByMinStock)
+        break
+      case 'name':
+        setSortFunction(sortItemsByName)
+        break
+    }
+  }
 
   const handleChangeOrder = event => {
     const { value } = event.currentTarget.dataset
     setOrder(value)
   }
 
-  useEffect(sortItemsByMinStock, [order])
+  useEffect(sortFunction, [order, sortFunction])
 
   return (
     <Box>
@@ -561,7 +574,11 @@ export const Items = () => {
           open={!!anchorEl}
           onClose={() => setAnchorEl(null)}
         >
-          <MenuItem onClick={sortItemsByMinStock}>Sort by min stock</MenuItem>
+          <MenuItem data-value="name" onClick={handleChangeSortFunction}>
+            <ListItemText>Name</ListItemText>
+            {sortFunction === sortItemsByName && <CheckIcon />}
+          </MenuItem>
+          <MenuItem data-value="stock" onClick={handleChangeSortFunction}>Min stock</MenuItem>
           <Divider />
           <MenuItem data-value="asc" onClick={handleChangeOrder}>
             <ListItemText>Ascending</ListItemText>
@@ -578,7 +595,7 @@ export const Items = () => {
         sx={{ backgroundColor: palette.background.paper }}
       >
         {sorted.map(item => (
-          <ItemContainer key={item.id} item={item} sort={sortItemsByMinStock} />
+          <ItemContainer key={item.id} item={item} sort={sortFunction === 'stock' ? sortItemsByMinStock : () => {}} />
         ))}
       </Box>
     </Box>
