@@ -1,20 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
-import {
-  Box,
-  Typography,
-  Button,
-  useTheme,
-  MenuItem,
-  Menu,
-  Divider,
-  ListItemText
-} from '@mui/material'
+import { Box, Typography, Button, useTheme, Menu, Divider } from '@mui/material'
 import { ItemContainer } from './ItemContainer'
-import classes from './Items.module.css'
 import { FilterContext } from '../../context/FilterContext'
+import { MenuItem } from './MenuItem'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import CheckIcon from '@mui/icons-material/Check'
+import classes from './Items.module.css'
 
 const items = [
   {
@@ -508,7 +499,7 @@ export const Items = () => {
   const [sorted, setSorted] = useState(items.toReversed())
   const [order, setOrder] = useState('asc')
   const [anchorEl, setAnchorEl] = useState(null)
-  const [sortFunction, setSortFunction] = useState(null)
+  const [sortFunction, setSortFunction] = useState('stock')
 
   const { palette } = useTheme()
   const { showFilters } = useContext(FilterContext)
@@ -524,19 +515,14 @@ export const Items = () => {
       if (_fst > _snd) return order === 'asc' ? 1 : -1
       return 0
     })
-  const sortItemsByMinStock = () => setSorted(sortBy(sorted, item => item.stock - item.min_stock, order))
-  const sortItemsByName = () => setSorted(sortBy(sorted, item => item.name, order))
+  const sortItemsByMinStock = () =>
+    setSorted(sortBy(sorted, item => item.stock - item.min_stock, order))
+  const sortItemsByName = () =>
+    setSorted(sortBy(sorted, item => item.name, order))
 
   const handleChangeSortFunction = event => {
     const { value } = event.currentTarget.dataset
-    switch (value) {
-      case 'stock':
-        setSortFunction(sortItemsByMinStock)
-        break
-      case 'name':
-        setSortFunction(sortItemsByName)
-        break
-    }
+    setSortFunction(value)
   }
 
   const handleChangeOrder = event => {
@@ -544,7 +530,16 @@ export const Items = () => {
     setOrder(value)
   }
 
-  useEffect(sortFunction, [order, sortFunction])
+  const getSortFunc = () => {
+    switch (sortFunction) {
+      case 'stock':
+        return sortItemsByMinStock
+      case 'name':
+        return sortItemsByName
+    }
+  }
+
+  useEffect(getSortFunc(), [order, sortFunction])
 
   return (
     <Box>
@@ -574,20 +569,31 @@ export const Items = () => {
           open={!!anchorEl}
           onClose={() => setAnchorEl(null)}
         >
-          <MenuItem data-value="name" onClick={handleChangeSortFunction}>
-            <ListItemText>Name</ListItemText>
-            {sortFunction === sortItemsByName && <CheckIcon />}
-          </MenuItem>
-          <MenuItem data-value="stock" onClick={handleChangeSortFunction}>Min stock</MenuItem>
+          <MenuItem
+            value="name"
+            onClick={handleChangeSortFunction}
+            text="Name"
+            checked={sortFunction === 'name'}
+          />
+          <MenuItem
+            value="stock"
+            onClick={handleChangeSortFunction}
+            text="Stock"
+            checked={sortFunction === 'stock'}
+          />
           <Divider />
-          <MenuItem data-value="asc" onClick={handleChangeOrder}>
-            <ListItemText>Ascending</ListItemText>
-            {order === 'asc' && <CheckIcon />}
-          </MenuItem>
-          <MenuItem data-value="desc" onClick={handleChangeOrder}>
-            <ListItemText>Descending</ListItemText>
-            {order === 'desc' && <CheckIcon />}
-          </MenuItem>
+          <MenuItem
+            value="asc"
+            onClick={handleChangeOrder}
+            text="Ascending"
+            checked={order === 'asc'}
+          />
+          <MenuItem
+            value="desc"
+            onClick={handleChangeOrder}
+            text="Descending"
+            checked={order === 'desc'}
+          />
         </Menu>
       </Box>
       <Box
@@ -595,7 +601,7 @@ export const Items = () => {
         sx={{ backgroundColor: palette.background.paper }}
       >
         {sorted.map(item => (
-          <ItemContainer key={item.id} item={item} sort={sortFunction === 'stock' ? sortItemsByMinStock : () => {}} />
+          <ItemContainer key={item.id} item={item} sort={getSortFunc()} />
         ))}
       </Box>
     </Box>
