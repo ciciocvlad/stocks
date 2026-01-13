@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from 'react'
-import { Box, Typography, Button, useTheme, Menu, Divider } from '@mui/material'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { Box, Typography, Button, useTheme, Menu, Divider, TextField, InputAdornment } from '@mui/material'
 import { ItemContainer } from './ItemContainer'
 import { FilterContext } from '../../context/FilterContext'
 import { MenuItem } from './MenuItem'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import SearchIcon from '@mui/icons-material/Search'
 import classes from './Items.module.css'
 
 const items = [
@@ -496,10 +497,13 @@ const items = [
 ]
 
 export const Items = () => {
-  const [sorted, setSorted] = useState(items.toReversed())
+  const [sorted, setSorted] = useState(items)
   const [order, setOrder] = useState('asc')
   const [anchorEl, setAnchorEl] = useState(null)
   const [sortFunction, setSortFunction] = useState('stock')
+  const [search, setSearch] = useState('')
+
+  const itemsCopy = useRef(items)
 
   const { palette } = useTheme()
   const { showFilters } = useContext(FilterContext)
@@ -515,10 +519,6 @@ export const Items = () => {
       if (_fst > _snd) return order === 'asc' ? 1 : -1
       return 0
     })
-  const sortItemsByMinStock = () =>
-    setSorted(sortBy(sorted, item => item.stock - item.min_stock, order))
-  const sortItemsByName = () =>
-    setSorted(sortBy(sorted, item => item.name, order))
 
   const handleChangeSortFunction = event => {
     const { value } = event.currentTarget.dataset
@@ -530,21 +530,35 @@ export const Items = () => {
     setOrder(value)
   }
 
+  const handleSearch = event => {
+    setSearch(event.target.value)
+    setSorted(itemsCopy.current.filter(item => item.name.includes(event.target.value)))
+  }
+
   const getSortFunc = () => {
     switch (sortFunction) {
-      case 'stock':
-        return sortItemsByMinStock
       case 'name':
-        return sortItemsByName
+        return item => item.name
+      case 'stock':
+        return item => item.stock
+      case 'min_stock':
+        return item => item.min_stock
+      case 'diff':
+        return item => item.stock - item.min_stock
     }
   }
 
-  useEffect(getSortFunc(), [order, sortFunction])
+  const setSortedUsingSortFunc = () => {
+    itemsCopy.current = sortBy(itemsCopy.current, getSortFunc(), order)
+    setSorted(itemsCopy.current.filter(item => item.name.includes(search)))
+  }
+
+  useEffect(setSortedUsingSortFunc, [order, sortFunction])
 
   return (
     <Box>
       <Box
-        sx={{ display: showFilters ? 'flex' : 'none', margin: '1rem 0 0 2rem' }}
+        sx={{ display: showFilters ? 'flex' : 'none', margin: '1rem 0 0 2rem', alignItems: 'center', gap: '1rem' }}
       >
         <Button
           id="sort-btn"
@@ -581,6 +595,8 @@ export const Items = () => {
             text="Stock"
             checked={sortFunction === 'stock'}
           />
+          <MenuItem value="min_stock" onClick={handleChangeSortFunction} text="Min Stock" checked={sortFunction === 'min_stock'} />
+          <MenuItem value="diff" onClick={handleChangeSortFunction} text="Difference" checked={sortFunction === 'diff'} />
           <Divider />
           <MenuItem
             value="asc"
@@ -595,13 +611,14 @@ export const Items = () => {
             checked={order === 'desc'}
           />
         </Menu>
+        <TextField placeholder="Search" value={search} onChange={handleSearch} slotProps={{ input: { startAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>, sx: { borderRadius: '50px', padding: '5px' }}, htmlInput: { sx: { padding: '0 5px' }} }} />
       </Box>
       <Box
         className={classes.container}
         sx={{ backgroundColor: palette.background.paper }}
       >
         {sorted.map(item => (
-          <ItemContainer key={item.id} item={item} sort={getSortFunc()} />
+          <ItemContainer key={item.id} item={item} sort={setSortedUsingSortFunc} />
         ))}
       </Box>
     </Box>
