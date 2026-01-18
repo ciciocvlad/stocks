@@ -1,9 +1,9 @@
 .item {
-    width: 200px;
+  width: 200px;
 }
 
 .switch {
-    width: 200px;
-    display: flex;
-    justify-content: space-between;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
 }

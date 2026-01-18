@@ -1,4 +1,10 @@
-import { IconButton, ListItemText, Menu, MenuItem, useTheme } from '@mui/material'
+import {
+  IconButton,
+  ListItemText,
+  Menu,
+  MenuItem,
+  useTheme
+} from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { useState } from 'react'
 import { ThemeSwitch } from '../ThemeSwitch/ThemeSwitch'
@@ -32,9 +38,17 @@ export const ActionsMenu = ({
         <KeyboardArrowDownIcon sx={{ color: palette.primary.contrastText }} />
       </IconButton>
 
-      <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={() => setAnchorEl(null)}>
-        <MenuItem onClick={() => setAnchorEl(null)} className={classes.item}>Profile</MenuItem>
-        <MenuItem onClick={() => setAnchorEl(null)} className={classes.item}>Settings</MenuItem>
+      <Menu
+        anchorEl={anchorEl}
+        open={!!anchorEl}
+        onClose={() => setAnchorEl(null)}
+      >
+        <MenuItem onClick={() => setAnchorEl(null)} className={classes.item}>
+          Profile
+        </MenuItem>
+        <MenuItem onClick={() => setAnchorEl(null)} className={classes.item}>
+          Settings
+        </MenuItem>
         <MenuItem
           onClick={() => {
             toggleFilters()

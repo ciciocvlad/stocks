@@ -1,5 +1,14 @@
 import { useContext, useEffect, useRef, useState } from 'react'
-import { Box, Typography, Button, useTheme, Menu, Divider, TextField, InputAdornment } from '@mui/material'
+import {
+  Box,
+  Typography,
+  Button,
+  useTheme,
+  Menu,
+  Divider,
+  TextField,
+  InputAdornment
+} from '@mui/material'
 import { ItemContainer } from './ItemContainer'
 import { FilterContext } from '../../context/FilterContext'
 import { MenuItem } from './MenuItem'
@@ -532,7 +541,9 @@ export const Items = () => {
 
   const handleSearch = event => {
     setSearch(event.target.value)
-    setSorted(itemsCopy.current.filter(item => item.name.includes(event.target.value)))
+    setSorted(
+      itemsCopy.current.filter(item => item.name.includes(event.target.value))
+    )
   }
 
   const getSortFunc = () => {
@@ -558,7 +569,12 @@ export const Items = () => {
   return (
     <Box>
       <Box
-        sx={{ display: showFilters ? 'flex' : 'none', margin: '1rem 0 0 2rem', alignItems: 'center', gap: '1rem' }}
+        sx={{
+          display: showFilters ? 'flex' : 'none',
+          margin: '1rem 0 0 2rem',
+          alignItems: 'center',
+          gap: '1rem'
+        }}
       >
         <Button
           id="sort-btn"
@@ -595,8 +611,18 @@ export const Items = () => {
             text="Stock"
             checked={sortFunction === 'stock'}
           />
-          <MenuItem value="min_stock" onClick={handleChangeSortFunction} text="Min Stock" checked={sortFunction === 'min_stock'} />
-          <MenuItem value="diff" onClick={handleChangeSortFunction} text="Difference" checked={sortFunction === 'diff'} />
+          <MenuItem
+            value="min_stock"
+            onClick={handleChangeSortFunction}
+            text="Min Stock"
+            checked={sortFunction === 'min_stock'}
+          />
+          <MenuItem
+            value="diff"
+            onClick={handleChangeSortFunction}
+            text="Difference"
+            checked={sortFunction === 'diff'}
+          />
           <Divider />
           <MenuItem
             value="asc"
@@ -611,14 +637,33 @@ export const Items = () => {
             checked={order === 'desc'}
           />
         </Menu>
-        <TextField placeholder="Search" value={search} onChange={handleSearch} slotProps={{ input: { startAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>, sx: { borderRadius: '50px', padding: '5px' }}, htmlInput: { sx: { padding: '0 5px' }} }} />
+        <TextField
+          placeholder="Search"
+          value={search}
+          onChange={handleSearch}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              sx: { borderRadius: '50px', padding: '5px' }
+            },
+            htmlInput: { sx: { padding: '0 5px' } }
+          }}
+        />
       </Box>
       <Box
         className={classes.container}
         sx={{ backgroundColor: palette.background.paper }}
       >
         {sorted.map(item => (
-          <ItemContainer key={item.id} item={item} sort={setSortedUsingSortFunc} />
+          <ItemContainer
+            key={item.id}
+            item={item}
+            sort={setSortedUsingSortFunc}
+          />
         ))}
       </Box>
     </Box>
