@@ -1,7 +1,14 @@
-import { IconButton, Menu, MenuItem, useTheme } from '@mui/material'
+import {
+  IconButton,
+  ListItemText,
+  Menu,
+  MenuItem,
+  useTheme
+} from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { useState } from 'react'
 import { ThemeSwitch } from '../ThemeSwitch/ThemeSwitch'
+import classes from './Dropdown.module.css'
 
 export const ActionsMenu = ({
   checked,
@@ -10,7 +17,6 @@ export const ActionsMenu = ({
   toggleFilters
 }) => {
   const [anchorEl, setAnchorEl] = useState(null)
-  const open = Boolean(anchorEl)
   const { palette } = useTheme()
 
   const handleClick = event => setAnchorEl(event.currentTarget)
@@ -32,19 +38,29 @@ export const ActionsMenu = ({
         <KeyboardArrowDownIcon sx={{ color: palette.primary.contrastText }} />
       </IconButton>
 
-      <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
-        <MenuItem onClick={() => setAnchorEl(null)}>Profile</MenuItem>
-        <MenuItem onClick={() => setAnchorEl(null)}>Settings</MenuItem>
+      <Menu
+        anchorEl={anchorEl}
+        open={!!anchorEl}
+        onClose={() => setAnchorEl(null)}
+      >
+        <MenuItem onClick={() => setAnchorEl(null)} className={classes.item}>
+          Profile
+        </MenuItem>
+        <MenuItem onClick={() => setAnchorEl(null)} className={classes.item}>
+          Settings
+        </MenuItem>
         <MenuItem
           onClick={() => {
             toggleFilters()
             setAnchorEl(null)
           }}
+          className={classes.item}
         >
           {showFilters ? 'Hide filters' : 'Show filters'}
         </MenuItem>
-        <MenuItem>
-          Theme: <ThemeSwitch onChange={handleChange} checked={checked} />
+        <MenuItem className={classes.switch}>
+          <ListItemText>Theme:</ListItemText>
+          <ThemeSwitch onChange={handleChange} checked={checked} />
         </MenuItem>
       </Menu>
     </>

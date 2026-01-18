@@ -36,6 +36,15 @@
   align-items: center;
 }
 
+.menu_item {
+  width: 200px;
+}
+
+.search_box {
+  padding: 5px;
+  border-radius: 20px;
+}
+
 @media only screen and (max-width: 800px) {
   .container {
     margin: 1rem 0;
